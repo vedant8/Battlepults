@@ -1,0 +1,38 @@
+#include<simplecpp>
+class block
+{double cx,cy;
+public:
+Rectangle *b;
+        void create(double &c1,double &c2)
+    {
+        cx=c1;
+        cy=c2;
+        b = new Rectangle;
+        *b=Rectangle(cx,cy,150,150);
+       //*b.setColor(COLOR("yellow"));
+       //*b.setFill(1);
+    }
+
+    void explode()
+    {Circle c1(cx,cy,10);
+    //c1.setColor(COLOR("red"));
+    //c1.setFill(1);
+    double r=10;
+    while(r<75)
+    {
+        c1.reset(cx,cy,r);
+        //c1.setColor(COLOR("red"));
+    c1.setFill(1);
+    r+=10;
+    }
+    c1.hide();
+    delete b;
+    }
+};
+main_program
+{initCanvas("test",1000,1000);
+    block b1;
+    b1.create(200.0,200.0);
+    wait(5);
+    b1.explode();
+}
