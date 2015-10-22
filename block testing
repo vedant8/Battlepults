@@ -1,3 +1,9 @@
+/*getting a runtime error
+----->Segmentation fault (core dumped)
+the problem is in the rectangle creation
+*/
+
+
 #include<simplecpp>
 class block
 {double cx,cy;
