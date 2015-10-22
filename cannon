@@ -1,0 +1,50 @@
+#include<simplecpp>
+class Cannon
+{ double cx,cy;
+public:
+    void fire(double &x1,double &y1,Circle C1)
+{
+        
+
+    double vx=5*sqrt(2.5*(abs(cx-x1)));
+    double vy=sqrt(2*9.8*(abs(cy-y1)));
+    //double rep=vy;
+    C1.penDown();
+    //cout<<vy<<endl;
+    while(C1.getY()<=y1)
+    {
+        C1.move(vx/10,-vy/10);
+        vy-=0.98;
+        }
+
+}
+Rectangle *b;
+
+        void create(double c1,double c2)
+    {
+        cx=c1;
+        cy=c2;
+        b = new Rectangle;
+        *b=Rectangle(cx,cy,150,150);
+       (*b).setColor(COLOR("black"));
+       (*b).setFill(1);
+    }
+    void canRotate(double f)
+                       {
+                           (*b).rotate(f);                       
+                   }
+    void aim()
+{
+   
+    Circle C1(cx,cy,1);
+    C1.setFill(1);
+    C1.show();
+    double f=0;
+    double x1=getClick()/65536;
+    double y1=getClick()%65536;
+    //cout<<"enter velocity and azimuth";
+    //cin>>v>>f;
+    f=(y2-C1.getY())/(x2-C1.getX());
+    canRotate(f);
+    fire(x1,y1,C1);
+}
