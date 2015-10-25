@@ -1,0 +1,102 @@
+#include<simplecpp>
+#include<conio.h>
+#include<cstdio>
+class Cannon
+{public:
+    double cx,cy,x1,y1,f;
+    Circle C1;
+    Rectangle *b;
+
+    void fire()
+    {   Circle C1(cx+25*cos(f),cy-7.5*abs(sin(f)),3);
+        C1.setFill(1);
+        explode(C1.getX()+25*cos(f),C1.getY()-7.5*abs(sin(f)));
+        Text t(500,500,"fire in the hole!!");
+        double vx=15*sqrt(2.5*(abs(cx-x1)));
+        double vy=sqrt(2*25*(abs(cy-y1)));
+        C1.penDown();
+        while(C1.getY()<=cy and C1.getX()<960)
+            {
+                        wait(0.01);
+                    C1.move(vx/10,-vy/10);
+                    vy-=9.8;
+            }
+            explode(C1.getX(),C1.getY());
+        wait(10);
+    }
+    void explode(double x2,double y2)
+    {   Circle c1(x2,y2,10);
+        c1.setColor(COLOR("red"));
+        c1.setFill(1);
+        int r=10;
+        while(r<15)
+        {
+            c1.reset(x2,y2,r);
+            c1.setColor(COLOR("red"));
+        c1.setFill(1);
+        //wait(0.01);
+        r+=1;
+        }
+        c1.hide();
+    }
+
+void move()
+{Text t(500,500,"Move the cannon with left and right arrow keys, and press up when ready");
+
+
+    while(true)
+    {
+        char a=getch();
+        if(a=='M')
+            {
+                if(cx<980)
+                {cx=cx+10;
+                (*b).move(10,0);}
+                else continue;
+            }
+        else if(a=='K')
+            {
+                if(cx>20)
+                {cx=cx-10;
+                (*b).move(-10,0);}
+                else continue;
+            }
+        else if(a=='H')
+            {
+                break;
+            }
+    }
+    t.hide();
+    return;
+}
+        void create(double c1,double c2)
+    {
+        cx=c1;
+        cy=c2;
+        b = new Rectangle;
+        *b=Rectangle(cx,cy,50,15);
+       (*b).setColor(COLOR("black"));
+       (*b).setFill(1);
+    }
+
+    void canRotate()
+                       {
+                        f=(y1-cy)/(x1-cx);
+
+                           (*b).rotate(atan(f));
+                           return;
+                   }
+    void aim()
+{
+
+Text t(500,500,"aiming");
+
+     x1=getClick()/65536;
+     y1=getClick()%65536;
+     t.hide();
+    canRotate();
+    wait(2);
+    fire();
+}
+
+};
