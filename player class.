@@ -1,0 +1,116 @@
+class Player
+{
+private:
+    Cannon c1;
+    Catapult c2;
+    //impact i1;
+    char choice;
+        long int score;
+    public:
+    block b[5];
+int ctr1=5;
+
+    void setchoice()//allows player to choose what weapon he wants to use
+    {
+        Text t(500,300,"Press z to use a cannon, or x to use a catapult");
+        choice=getch();
+        t.hide();
+        return;
+    }
+
+    void creator()//creates a weapon depending on the player's choice
+    {
+        if (choice=='z')
+            c1.create(200,450);
+        else if(choice=='x')
+            c2.create(200,450);
+            return;
+    }
+
+    void blockcreate()//creates blocks at the clicked positions
+    {
+        for(int i=0;i<5;i++)
+        {
+           int pos=getClick();
+            double c2=pos/65536;
+            double c3=pos%65536;
+            b[i].create(c2,c3);
+        }
+        return;
+    }
+
+    void move()//moves either the cannon or the catapult
+    {
+        if (choice=='z')
+            c1.move();
+        else if(choice=='x')
+            c2.move();
+
+            return;
+    }
+
+    int track(block a[])//common tracking function,returns index of blown block
+    {
+         if (choice=='z')   {
+
+         for(int i=0;i<5;i++)
+         {
+             if(abs(a[i].GY()-c1.getY1())<=5)//check on y position,within a small margin
+             {
+                 if(abs(a[i].GX()-c1.getX1())<=5)
+                    return i;
+                 else return -1;
+             }
+             else return -1;
+         }
+    }
+else if (choice=='x')
+{
+    for(int i=0;i<5;i++)
+         {
+             if(abs(a[i].GY()-c2.getY1())<=5)//check on y position,within a small margin
+             {
+                 if(abs(a[i].GX()-c2.getX1())<=5)
+                    return i;
+                 else return -1;
+             }
+             else return -1;
+         }
+        }
+    }
+
+    void impact(int i)
+    {
+        if(i!=-1)//checks for impact
+        {
+            if (choice=='z')
+            {
+              int x=b[i].damage(5);//instantly destroys block
+              score+=100;
+              if (x==-1)
+                ctr-=1;
+
+              return;
+            }
+            else if(choice=='x')
+            {
+                b[i].damage(3);//two hits
+                score+=80;
+            return;
+            }
+        }
+        else return;
+    }
+    void getScore()
+    {
+        return score;
+    }
+    void firing()//firing sequence
+    {
+        if(choice=='z')
+            c1.aim();
+        else if(choice=='x')
+            c2.aim();
+    return;
+    }
+        };
