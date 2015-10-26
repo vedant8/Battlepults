@@ -1,0 +1,28 @@
+#include<simplecpp>
+main_program
+{
+    initCanvas("battlepults",1366,768);
+  //arkya, create the scenery over here
+  Player p1,p2;//player creation
+  Text t1(500,300,"Player RED may place his blocks");//block placement
+  p1.blockcreate();
+  t1.hide();
+  Text t2(500,300,"Player BLUE may place his blocks");
+  p2.blockcreate();
+  t2.hide();
+  Text t3(500,300,"Player RED may choose a weapon");//weapon selection
+  p1.setchoice();
+  p1.creator();
+  t3.hide();
+  Text t4(500,300,"Player BLUE may choose a weapon");
+  p2.setchoice();
+  p2.creator();
+  t4.hide();
+
+  while(true)
+  {
+      //main engine, arkya can you start??
+
+  }
+
+}
