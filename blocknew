@@ -1,24 +1,33 @@
-
 #include<simplecpp>
-{
 
-    block()
+class Block{
+double cx,cy;
+    int health;
+public:
+Rectangle *b=new Rectangle;
+
+
+    Block(){
+    }
+    Block(double c1,double c2)
     {
         cx=0;
         cy=0;
-        c1=0;
-        c2=0;
-        r=0;
+        //c1=0;
+        //c2=0;
+        //r=0;
         health=5;
-        *b=new Rectangle;
+        //*b=new Rectangle;
     }
-    void create(double c1,double c2)
+
+
+    void create(double c1,double c2,bool pl)
     {
         cx=c1;
         cy=c2;
-
-        *b=Rectangle(cx,cy,150,150);
-       (*b).setColor(COLOR(0,255,255));
+        *b=Rectangle(cx,cy,80,80);
+       if(!pl) (*b).setColor(COLOR("white"));
+       else (*b).setColor(COLOR("black"));
        (*b).setFill(1);
     }
 
@@ -26,7 +35,7 @@
     { Circle c1(cx,cy,10);
     c1.setColor(COLOR("red"));
     c1.setFill(1);
-    r=10;
+    int r=10;
     while(r<75)
     {
         c1.reset(cx,cy,r);
@@ -49,12 +58,11 @@ int damage(int d)//damage taken by the block
 }
 double GX()
 {
-    return cx-75;
-    }
+    return cx;
+}
 
 double GY()
 {
-    return cy-75;
+    return cy;//cy+75?
 }
 };
-
